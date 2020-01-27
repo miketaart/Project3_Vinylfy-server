@@ -18,13 +18,13 @@ var authOptions = {
   json: true
 };
 
-app.get("/album/covers/:title", (req, res) => {
+app.get("/album/:title", (req, res) => {
   request.post(authOptions, function(error, response, body) {
     if (!error && response.statusCode === 200) {
       // use the access token to access the Spotify Web API
       var token = body.access_token;
       var options = {
-        url: `https://api.spotify.com/v1/search?q=${req.params.title}&type=track&limit=1&offset=20`,
+        url: `https://api.spotify.com/v1/search?q=${req.params.title}&type=track&limit=1`,
         headers: {
           Authorization: "Bearer " + token
         },
@@ -38,21 +38,21 @@ app.get("/album/covers/:title", (req, res) => {
   });
 });
 
-// request.post(authOptions, function(error, response, body) {
-//   if (!error && response.statusCode === 200) {
-//     // use the access token to access the Spotify Web API
-//     var token = body.access_token;
-//     var options = {
-//       url: "https://api.spotify.com/v1/users/jmperezperez",
-//       headers: {
-//         Authorization: "Bearer " + token
-//       },
-//       json: true
-//     };
-//     request.get(options, function(error, response, body) {
-//       console.log(body);
-//     });
-//   }
-// });
+ request.post(authOptions, function(error, response, body) {
+   if (!error && response.statusCode === 200) {
+     // use the access token to access the Spotify Web API
+     var token = body.access_token;
+     var options = {
+       url: "https://api.spotify.com/v1/users/miketa",
+       headers: {
+         Authorization: "Bearer " + token
+       },
+       json: true
+     };
+     request.get(options, function(error, response, body) {
+       console.log(body);
+     });
+   }
+});
 
 module.exports = app;
