@@ -25,6 +25,27 @@ app.get("/album/:title", (req, res) => {
       var token = body.access_token;
       var options = {
         url: `https://api.spotify.com/v1/search?q=${req.params.title}&type=track&limit=1`,
+        
+        headers: {
+          Authorization: "Bearer " + token
+        },
+        json: true
+      };
+      request.get(options, function(error, response, body) {
+        console.log(body);
+        res.json(body);
+      });
+    }
+  });
+});
+
+app.get("/album/tracklist/:albumID", (req, res) => {
+  request.post(authOptions, function(error, response, body) {
+    if (!error && response.statusCode === 200) {
+      var token = body.access_token;
+      var options = {
+        url: `https://api.spotify.com/v1/albums/${req.params.albumID}/tracks`,
+        
         headers: {
           Authorization: "Bearer " + token
         },

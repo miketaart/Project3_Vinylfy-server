@@ -13,8 +13,8 @@ app.use(
 );
 
 app.use("/spotify", require("./api-proxies/spotify"));
-app.use("/discogs", require("./api-proxies/discogsCollection"));
-app.use("/discogs", require("./api-proxies/discogsWantlist"));
+app.use("/discogs", require("./api-proxies/discogs"));
+
 app.use("/auth", require("./routes/auth"));
 app.use("/testApi", require("./routes/testApi"));
 
