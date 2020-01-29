@@ -24,7 +24,8 @@ app.get("/album/:title", (req, res) => {
       // use the access token to access the Spotify Web API
       var token = body.access_token;
       var options = {
-        url: `https://api.spotify.com/v1/search?q=${req.params.title}&type=track&limit=1`,
+        url: `https://api.spotify.com/v1/search?q=${req.params.title}&type=album&limit=1`,
+        //`https://api.spotify.com/v1/search?q=${req.params.title}&type=track&limit=1`,
         
         headers: {
           Authorization: "Bearer " + token
@@ -32,7 +33,7 @@ app.get("/album/:title", (req, res) => {
         json: true
       };
       request.get(options, function(error, response, body) {
-        console.log(body);
+        console.log(body);1
         res.json(body);
       });
     }
