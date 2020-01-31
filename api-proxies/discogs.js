@@ -8,6 +8,7 @@ const secret = "DDUXNYboJNDLbwhCZaazYnYmsVNSSIzO";
 
 
 app.get("/collection/user/:username", (req, res) => {
+
   var options = {
     'method': 'GET',
     'url': `https://api.discogs.com/users/${req.params.username}/collection/folders/0/releases?key=${api_key}&secret=${secret}`,
