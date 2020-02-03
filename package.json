@@ -16,6 +16,9 @@
     "request": "^2.88.0",
     "unirest": "^0.6.0"
   },
+  "engines": {
+    "node": "10.16.3
+  },
   "devDependencies": {},
   "scripts": {
     "start": "node app.js",
