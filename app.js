@@ -3,13 +3,12 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const PORT = 8000;
-
-
 const session = require('express-session')
 
+require("dotenv").config();
+
 var sessionOptions = {
-  secret: 'keyboard cat',
+  secret: process.env.SESSION_SECRET,
   cookie: {}
 }
 app.use(session(sessionOptions));
@@ -19,7 +18,7 @@ let options = {
   useUnifiedTopology: true
 };
 
-mongoose.connect('mongodb://localhost:27017/vinylfy', options, (err, connectionInfo) => {
+mongoose.connect(process.env.MONGODB_URI, options, (err, connectionInfo) => {
   if (err) console.log("ERROR", err);
   else console.log("connected to db");
 })
@@ -31,7 +30,7 @@ app.use(
   cors({
     allowedHeaders: ["authorization", "Content-Type"], // you can change the headers
     exposedHeaders: ["authorization"], // you can change the headers
-    origin: "*",
+    origin: process.env.client,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false
   })
@@ -49,6 +48,6 @@ app.use((err, req, res, next) => {
   })
 })
 
-app.listen(PORT, () => {
-  console.log("listening, server is running on Port: " + PORT);
+app.listen(process.env.PORT, () => {
+  console.log("listening, server is running");
 })

@@ -9,7 +9,7 @@ router.route("/signup")
     .post((req, res, next) => {
 
         bcrypt.hash(req.body.password, 10, function (err, hash) {
-            if (`err`) return next(createError(500, "Hashing failed", err));
+            if (err) return next(createError(500, "Hashing failed", err));
             User.findOne({
                     username: req.body.username
                 })
@@ -26,7 +26,7 @@ router.route("/signup")
                 .then((user) => {
                     req.session.user = user;
                     console.log("USER CREATED", user)
-                    res.json(user);
+                    res.status(200).json(user);
                 })
                 .catch((error) => {
                     if (error.message === "Username already exists") next(createError(400, error.message));
@@ -52,7 +52,7 @@ router.route("/login")
                     bcrypt.compare(req.body.password, user.password, function (err, correct) {
                         if (correct) {
                             req.session.user = user;
-                            res.status(200).json(user);
+                            res.status(200).json(user); //only 1 res.json per call
                         } else {
                             res.status(403).json({
                                 "user": "wrong password"
@@ -63,6 +63,7 @@ router.route("/login")
             })
     })
 
+    
 router.delete("/logout", (req, res) => {
     req.session.destroy(); // delete all data attached to the session
     res.status(200).send("logged out");

@@ -3,8 +3,8 @@ var express = require("express");
 var app = express();
 
 
-const api_key = "JkjkJaFTmHXCgDmTnwcV";
-const secret = "DDUXNYboJNDLbwhCZaazYnYmsVNSSIzO";
+const api_key = process.env.API_KEY;
+const secret = process.env.SECRET;
 
 
 app.get("/collection/user/:username", (req, res) => {
@@ -21,6 +21,7 @@ app.get("/collection/user/:username", (req, res) => {
   request(options, function (error, response) {
     if (error) throw new Error(error);
     res.json(response.body)
+    console.log(response.body)
   });
 
 })
