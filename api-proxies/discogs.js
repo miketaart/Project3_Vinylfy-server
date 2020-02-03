@@ -3,8 +3,8 @@ var express = require("express");
 var app = express();
 
 
-const api_key = process.env.API_KEY;
-const secret = process.env.SECRET;
+const api_key = process.env.API_KEY_DISCOGS;
+const secret = process.env.SECRET_DISCOGS;
 
 
 app.get("/collection/user/:username", (req, res) => {

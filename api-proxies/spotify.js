@@ -2,8 +2,8 @@ var express = require("express");
 var app = express();
 var request = require("request");
 
-var client_id = "44b88bf305244f6594bfb83e8f09663d"; // Your client id
-var client_secret = "116b87c24ed6432f9e2c39cfced431f6"; // Your secret
+var client_id = process.env.API_KEY_SPOTIFY; // Your client id
+var client_secret = process.env.SECRET_SPOTIFY; // Your secret
 
 // your application requests authorization
 var authOptions = {
